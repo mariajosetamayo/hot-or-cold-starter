@@ -45,7 +45,7 @@ $(document).ready(function(){
 		 var n = Math.ceil(Math.random() * 100);
 		 return n
 	}
-
+	console.log("YISS")
 		
     /*---  to submit a guess ---*/
 
