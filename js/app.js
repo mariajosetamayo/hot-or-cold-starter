@@ -1,6 +1,6 @@
 
 $(document).ready(function(){
-
+	/*--- Variables ---*/
 	var input = 100
 	var counter = 0
 	var randomNumber = generateRandomNumber()
