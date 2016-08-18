@@ -1,35 +1,36 @@
 
 $(document).ready(function(){
 
+	var input = 100
+	var counter = 0
+	var randomNumber = generateRandomNumber()
+
 	/*--- Display information modal box ---*/
+  	
   	$(".what").click(function(){
     	$(".overlay").fadeIn(1000);
   	});
 
   	/*--- Hide information modal box ---*/
+  	
   	$("a.close").click(function(){
   		$(".overlay").fadeOut(1000);
   	});
 
-  	$(".new").click(function clearAll(){
+  	$(".new").click(function clearAll(event){
+  		event.preventDefault();
   		document.getElementById("feedback").innerHTML = "Make your Guess!"
-  		// $("counter").val('');
   		$("#guessList").empty()
-	    // document.getElementById("userGuess").value = ""
-	    // document.getElementById("feedback").value = ""
-	    document.getElementById("count").value = ""
-	    // document.getElementById("guessList").value = ""
+  		counter = 0
+	    document.getElementById("count").innerHTML = counter
+	    randomNumber = generateRandomNumber()
+	 
 	});
 	
 	/*---  to get the user's input ---*/
-	var input = 100
-	var counter = 0
-	var randomNumber
 
 	$("#userGuess").keyup(function () {
 	    input = document.getElementById("userGuess").value
-	    // var userInput = Number(input)
-	    console.log(input)
 	});
 	
 
@@ -42,35 +43,31 @@ $(document).ready(function(){
     });
 
 	function generateRandomNumber(){
-		 randomNumber = Math.floor(Math.random() * 100) + 1;
-		console.log(generateNumber())
+		 var n = Math.ceil(Math.random() * 100);
+		 return n
 	}
 
-	
-    // to submit a guess
+		
+    /*---  to submit a guess ---*/
+
     $("#guessForm").submit(function (event){
-    	// console.log($('#feedback').text())
     	event.preventDefault();
     	counter++
     	var userInput = Number(input)
-    	
     	var inputVsRandom = randomNumber - userInput;
     	
 		if (randomNumber === userInput){
-			document.getElementById("feedback").innerHTML = "You win!"
+			document.getElementById("feedback").innerHTML = "You win! Click on New Game to play again"
 		}
 		else if (Math.abs(inputVsRandom) < 10){
 			document.getElementById("feedback").innerHTML = "Hot"
 		} 
-		else if (Math.abs(inputVsRandom) > 9 && Math.abs(inputVsRandom) < 20){
+		else if (Math.abs(inputVsRandom) > 10 && Math.abs(inputVsRandom) < 20){
 			document.getElementById("feedback").innerHTML = "Warm"
 		}
-		else if (Math.abs(inputVsRandom) > 19 && Math.abs(inputVsRandom) < 30){
+		else if (Math.abs(inputVsRandom) > 20 && Math.abs(inputVsRandom) < 30){
 			document.getElementById("feedback").innerHTML = "Cold"
 		}
-		// else if (Math.abs(inputVsRandom) > 29 && Math.abs(inputVsRandom) < 50){
-		// 	document.getElementById("feedback").innerHTML = "Cold"
-		// }
 		else {
 			document.getElementById("feedback").innerHTML = "Ice cold"
 		}
